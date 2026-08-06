@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/impefeverif/db" VERSION="20260727" COMMENT="Registro de acreditaciones validadas y documentacion destruida.">
+  <TABLES>
+    <TABLE NAME="local_impefeverif_reg" COMMENT="Traza de validacion y purga. Sobrevive a la destruccion del documento.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Usuario acreditado."/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Course module de la tarea."/>
+        <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="via" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Via de acreditacion declarada."/>
+        <FIELD NAME="modo" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="auto" SEQUENCE="false" COMMENT="auto o manual."/>
+        <FIELD NAME="estado" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="validada, sin_archivo, formato_no_admitido, purgada."/>
+        <FIELD NAME="timesubmitted" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timevalidated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="graderid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Cuenta que consigna la calificacion."/>
+        <FIELD NAME="numfiles" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="fileext" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="filesize" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="filehash" TYPE="char" LENGTH="60" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="SHA1 del documento comprobado. Acredita el control sin conservar el dato."/>
+        <FIELD NAME="timepurged" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="notificado" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="usercm" UNIQUE="true" FIELDS="userid, cmid"/>
+        <INDEX NAME="purga" UNIQUE="false" FIELDS="timevalidated, timepurged"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_impefeverif_matr" COMMENT="Libro de matriculas. Persiste aunque se de de baja al usuario, porque la plaza anual sigue consumida.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timeenrolled" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Libera una plaza simultanea."/>
+        <FIELD NAME="timeunenrolled" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="No devuelve la plaza anual."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="usertime" UNIQUE="false" FIELDS="userid, timeenrolled"/>
+        <INDEX NAME="usercourse" UNIQUE="false" FIELDS="userid, courseid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
