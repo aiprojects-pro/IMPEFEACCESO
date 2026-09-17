@@ -1,0 +1,66 @@
+{{!
+    @template theme_moove/impefe/catalogue
+
+    Catalogue category cards, shown only to verified users, plus the pending
+    verification notice shown to everyone else.
+
+    Context variables required for this template:
+    * categorycardsenabled - true when there are cards to show
+    * categorycards - array of {name, url, image}
+    * verificationnotice - true when the user is not verified yet
+    * verificationisguest - true when nobody is logged in
+    * verificationurl - where the notice's button points
+
+    Example context (json):
+    {
+        "categorycardsenabled": true,
+        "categorycards": [
+            {"name": "Idiomas", "url": "/course/index.php?categoryid=55", "image": "/pix/idiomas.png"}
+        ],
+        "verificationnotice": false,
+        "verificationisguest": false,
+        "verificationurl": "/mod/assign/view.php?id=1"
+    }
+}}
+{{#categorycardsenabled}}
+    <section id="impefe-category-cards" aria-labelledby="impefe-category-cards-title">
+        <h2 id="impefe-category-cards-title">Explora las áreas de aprendizaje y elige tu formación</h2>
+        <div class="impefe-category-grid">
+            {{#categorycards}}
+                <a class="impefe-category-card" href="{{{url}}}">
+                    <span class="impefe-category-card-image">
+                        <img src="{{{image}}}" alt="">
+                    </span>
+                    <span class="impefe-category-card-title">{{name}}</span>
+                </a>
+            {{/categorycards}}
+        </div>
+    </section>
+{{/categorycardsenabled}}
+
+{{#verificationnotice}}
+    <div class="impefe-verification-notice" role="status">
+        <div class="impefe-verification-notice-icon" aria-hidden="true">
+            {{#pix}}i/warning, core{{/pix}}
+        </div>
+        <div class="impefe-verification-notice-body">
+            {{#verificationisguest}}
+                <h2 class="impefe-verification-notice-title">Solicita tu acceso al catálogo</h2>
+                <p>
+                    Los cursos están reservados a personas empadronadas en Ciudad Real,
+                    trabajadoras de empresas del municipio o matriculadas en FP o en la UCLM.
+                    Crea tu cuenta y adjunta el documento que acredite tu situación.
+                </p>
+                <a class="btn btn-primary" href="{{{verificationurl}}}">Crear cuenta</a>
+            {{/verificationisguest}}
+            {{^verificationisguest}}
+                <h2 class="impefe-verification-notice-title">Tu acceso está pendiente de verificación</h2>
+                <p>
+                    Verás el catálogo completo en cuanto revisemos tu documentación.
+                    Si aún no la has enviado, adjunta el documento que acredite tu situación.
+                </p>
+                <a class="btn btn-primary" href="{{{verificationurl}}}">Enviar documentación</a>
+            {{/verificationisguest}}
+        </div>
+    </div>
+{{/verificationnotice}}

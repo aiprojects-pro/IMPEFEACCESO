@@ -73,7 +73,7 @@ $policycontent = <<<'HTML'
 <p>La documentación presentada será revisada para comprobar la vía de acceso seleccionada.</p>
 
 <h4>Límites de uso</h4>
-<p>El acceso a la plataforma está sujeto a un máximo de cinco acciones formativas por persona en una ventana de doce meses contada desde la primera matrícula, y a un máximo de dos cursos simultáneos. Una matrícula consume plaza aunque la persona abandone posteriormente el curso. La plaza simultánea se libera al finalizar el curso.</p>
+<p>El acceso a la plataforma está sujeto a un máximo de cinco acciones formativas por persona en una ventana de doce meses contada desde la primera matrícula. No se podrán realizar más de dos acciones formativas simultáneamente. Los cursos no finalizados dejarán de ocupar plaza simultánea transcurridos noventa días desde la matrícula.</p>
 
 <h4>Conservación de documentos</h4>
 <p>La documentación acreditativa se conserva durante un mes contado desde la fecha de validación. Transcurrido ese plazo, finalizará su conservación. Se conservará un registro técnico de la comprobación: persona acreditada, vía, modo de validación, fechas de aportación y validación, extensión, tamaño y huella criptográfica del documento.</p>
@@ -96,23 +96,32 @@ $sectionhtml = <<<HTML
   <h3>Cómo acceder a los cursos</h3>
   <p>El acceso a los cursos está reservado a las personas empadronadas, estudiantes o trabajadoras en Ciudad Real. Para obtenerlo deberá acreditar su situación mediante el siguiente procedimiento.</p>
 
-  <h4>Documentación admitida</h4>
-  <p>Aporte uno de estos documentos, según su caso:</p>
+  <h4>Formas de acreditación</h4>
+  <p>Acredite su situación según su caso:</p>
   <ul>
-    <li><strong>Empadronado/a:</strong> volante o certificado de empadronamiento en Ciudad Real.</li>
+    <li><strong>Empadronado/a:</strong> declaración responsable de estar empadronado/a en Ciudad Real (no hay que aportar ningún documento).</li>
     <li><strong>Estudiante:</strong> matrícula, carné o certificado de un centro educativo de Ciudad Real.</li>
     <li><strong>Trabajador/a:</strong> contrato, nómina reciente o certificado de empresa que acredite el centro de trabajo en Ciudad Real.</li>
   </ul>
 
   <h4>Procedimiento</h4>
+  <h5>Para Empadronados/as</h5>
+  <ol>
+    <li><strong>Rellene la declaración responsable.</strong> Acceda a la actividad "Declaración responsable de empadronamiento" e introduzca sus datos personales.</li>
+    <li><strong>Firma electrónica.</strong> Firme electrónicamente la declaración responsable confirmando que está empadronado en Ciudad Real.</li>
+    <li><strong>Revisión y validación.</strong> El personal responsable revisará la declaración de forma manual. El plazo de resolución es de hasta 3 días hábiles. Este trámite no constituye una calificación ni una evaluación.</li>
+    <li><strong>Comunicación y acceso.</strong> Una vez validada la declaración, recibirá un correo electrónico de confirmación, momento a partir del cual los cursos quedarán disponibles en su cuenta.</li>
+  </ol>
+
+  <h5>Para Estudiantes y Trabajadores/as</h5>
   <ol>
     <li><strong>Aporte su documentación.</strong> Acceda a la actividad "Subir documentación" y suba el documento correspondiente (PDF, JPG o PNG).</li>
     <li><strong>Revisión y validación.</strong> El personal responsable revisará la documentación de forma manual. El plazo de resolución es de hasta 3 días hábiles. Este trámite no constituye una calificación ni una evaluación.</li>
     <li><strong>Comunicación y acceso.</strong> Una vez validada la documentación, recibirá un correo electrónico de confirmación con el enlace de acceso, momento a partir del cual los cursos quedarán disponibles en su cuenta.</li>
   </ol>
 
-  <p><strong>¿La documentación no resulta válida?</strong> Se le comunicará el motivo por correo electrónico y podrá aportarla de nuevo desde la misma actividad, sin trámites adicionales.</p>
-  <p><strong>¿Necesita ayuda?</strong> Puede escribirnos a <a href="mailto:{$supportemail}">{$supportemail}</a>.</p>
+  <p><strong>¿Su declaración o documentación no resulta válida?</strong> Se le comunicará el motivo por correo electrónico y podrá presentarla de nuevo desde la misma actividad, sin trámites adicionales.</p>
+  <p><strong>¿Necesita ayuda?</strong> Puede escribirnos a través de nuestro <a href="https://impefe.campusenlinea.es/mod/feedback/view.php?id=3399">formulario de contacto</a>.</p>
 </div>
 HTML;
 
